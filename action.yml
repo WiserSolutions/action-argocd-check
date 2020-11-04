@@ -1,0 +1,27 @@
+name: 'ArgoCD GitOps Check'
+author: 'Daniel Beal'
+branding:
+  icon: 'align-justify'
+  color: 'green'
+description: 'Prints a diff of the state against argo in a pull request chat'
+inputs:
+  server:
+    description: 'URI of the ArgoCD server'
+    required: true
+  token:
+    description: 'Credentials to log into the ArgoCD server'
+    required: true
+  app:
+    description: 'Name of the app to compare against on ArgoCD side'
+    required: true
+  path:
+    description: 'Path within this repository of the ArgoCD source files'
+    required: true
+
+outputs:
+  outDiff:
+    description: 'The diff which can be injected into a comment on the PR'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
