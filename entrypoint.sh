@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 set -e
 
 curl -Lo /usr/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.8/argocd-linux-amd64
