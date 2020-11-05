@@ -16,5 +16,5 @@ if [ $? -gt 0 ]; then
 
   pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
-  curl -XPOST $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$pull_number/comments --data "{\"body\": \"ArgoCD Diff: \n\`\`\`diff\n$df\n\`\`\`\"}"
+  curl -XPOST -H "Authorization: Bearer $INPUT_GITHUB_TOKEN" $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$pull_number/comments --data "{\"body\": \"ArgoCD Diff: \n\`\`\`diff\n$df\n\`\`\`\"}"
 fi
