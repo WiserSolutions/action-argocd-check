@@ -8,6 +8,13 @@
 #chmod +x /usr/bin/argocd
 
 # TODO: latesr comment directly on the build and block it if fail
-argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $INPUT_PATH $INPUT_APP
+df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $INPUT_PATH $INPUT_APP)
 
-echo $?
+if [ $? -gt 0 ]; then
+  echo "presenting diff"
+  echo "$df"
+
+  pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+
+  curl -XPOST --data "{\"body\": \"ArgoCD Diff: \n\`\`\`$df\`\`\`\"}" $GITHUB_API_URL/repos/$GITHUB_REPO/issues/$pull_number/comments
+fi
