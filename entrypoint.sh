@@ -2,7 +2,7 @@
 
 
 #set -e
-#set -x
+set -x
 
 #curl -Lo /usr/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.8/argocd-linux-amd64
 #chmod +x /usr/bin/argocd
