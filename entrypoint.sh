@@ -2,9 +2,13 @@
 set -x
 
 # TODO: latesr comment directly on the build and block it if fail
-df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $INPUT_PATH $INPUT_APP)
+df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $INPUT_PATH $INPUT_APP 2>&1)
 
-if [ $? -gt 0 ]; then
+export res=$?
+
+echo "Result: $res"
+
+if [ $res -gt 0 ]; then
   echo "presenting diff"
   echo "$df"
 
