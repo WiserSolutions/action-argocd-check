@@ -8,7 +8,7 @@ inputs:
   server:
     description: 'URI of the ArgoCD server'
     required: true
-  github-token:
+  github_token:
     description: 'Credentials to post comment on pull request with information'
     required: false
   token:
