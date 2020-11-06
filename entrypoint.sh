@@ -15,7 +15,7 @@ if [ $res -eq 20 ]; then
 
   curl -XPOST -H "Authorization: Bearer $INPUT_GITHUB_TOKEN" \
     $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$pull_number/comments --data \
-    "$(jq --arg d "$df" -n '{ body: ("*ArgoCD Failure*\n```\n" + $d + "\n```") }')"
+    "$(jq --arg d "$df" -n '{ body: ("**ArgoCD Failure**\n```\n" + $d + "\n```") }')"
 
   # exit with error to prevent merging
   exit 1
@@ -27,5 +27,5 @@ if [ $res -eq 1 ]; then
 
   curl -XPOST -H "Authorization: Bearer $INPUT_GITHUB_TOKEN" \
     $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$pull_number/comments --data \
-    "$(jq --arg d "$df" -n '{ body: ("*ArgoCD Diff*\n```diff\n" + $d + "\n```") }')"
+    "$(jq --arg d "$df" -n '{ body: ("**ArgoCD Diff**\n```diff\n" + $d + "\n```") }')"
 fi
