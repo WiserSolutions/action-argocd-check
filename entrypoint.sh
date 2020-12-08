@@ -1,6 +1,8 @@
 #!/bin/sh
 #set -x
 
+export KUBECTL_EXTERNAL_DIFF="diff -u"
+
 # TODO: latesr comment directly on the build and block it if fail
 df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $INPUT_PATH $INPUT_APP 2>&1)
 
