@@ -18,8 +18,8 @@ inputs:
     description: 'Name of the app to compare against on ArgoCD side'
     required: true
   path:
-    description: 'Path within this repository of the ArgoCD source files'
-    required: true
+    description: 'IGNORED: Path within this repository of the ArgoCD source files (now read from argocd)'
+    required: false
 
 outputs:
   outDiff:
