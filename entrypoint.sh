@@ -6,7 +6,7 @@ export KUBECTL_EXTERNAL_DIFF="diff -u"
 # first request is to establish 
 info=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app get $INPUT_APP -ojson)
 
-local_path=$(jq -r .spec.source.path)
+local_path=$(jq -r .spec.source.path <<< $info)
 
 # TODO: latesr comment directly on the build and block it if fail
 df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $local_path $INPUT_APP 2>&1)
