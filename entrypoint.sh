@@ -3,8 +3,13 @@
 
 export KUBECTL_EXTERNAL_DIFF="diff -u"
 
+# first request is to establish 
+info=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app get bootstrap-infra -ojson)
+
+local_path=$(jq -r .spec.source.path)
+
 # TODO: latesr comment directly on the build and block it if fail
-df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $INPUT_PATH $INPUT_APP 2>&1)
+df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $local_path $INPUT_APP 2>&1)
 
 export res=$?
 
