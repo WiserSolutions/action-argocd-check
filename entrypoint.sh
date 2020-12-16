@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #set -x
 
 export KUBECTL_EXTERNAL_DIFF="diff -u"
