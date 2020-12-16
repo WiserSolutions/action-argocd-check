@@ -36,3 +36,9 @@ if [ $res -eq 1 ]; then
     $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$pull_number/comments --data \
     "$(jq --arg d "$df" -n '{ body: ("**ArgoCD Diff**\n```diff\n" + $d + "\n```") }')"
 fi
+
+if [ $res -eq 0 ]; then
+  curl -XPOST -H "Authorization: Bearer $INPUT_GITHUB_TOKEN" \
+    $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$pull_number/comments --data \
+    "$(jq --arg d "$df" -n '{ body: ("**ArgoCD Diff**\n```\nno changes detected!\n```") }')"
+fi
