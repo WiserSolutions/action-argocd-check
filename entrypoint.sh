@@ -9,7 +9,7 @@ info=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app 
 local_path=$(jq -r .spec.source.path <<< $info)
 
 # TODO: latesr comment directly on the build and block it if fail
-df=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $local_path $INPUT_APP 2>&1)
+df=$(argocd --grpc-web --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app diff --local $local_path $INPUT_APP 2>&1)
 
 export res=$?
 
