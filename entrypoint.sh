@@ -4,7 +4,7 @@
 export KUBECTL_EXTERNAL_DIFF="diff -u"
 
 # first request is to establish 
-info=$(argocd --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app get $INPUT_APP -ojson)
+info=$(argocd --grpc-web --insecure --server $INPUT_SERVER --auth-token "$INPUT_TOKEN" app get $INPUT_APP -ojson)
 
 local_path=$(jq -r .spec.source.path <<< $info)
 
