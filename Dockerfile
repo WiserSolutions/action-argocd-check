@@ -1,5 +1,5 @@
 #FROM alpine:3.9
-FROM argoproj/argocd:v1.7.8
+FROM argoproj/argocd
 
 USER 0
 
